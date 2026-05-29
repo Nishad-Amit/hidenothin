@@ -3052,7 +3052,8 @@
       window.scrollTo(0, 0);
 
       const loader = document.getElementById('page-loader');
-      const loaderWord = loader.querySelector('.loader-word');
+      const heroTitle = document.querySelector('.hero-title.reveal-text');
+      const heroImg = document.querySelector('.hero-slot img');
 
       function dismissLoader() {
         loader.classList.add('dismissing');
@@ -3061,11 +3062,9 @@
           loader.classList.add('gone');
         }, { once: true });
 
-        const heroTitle = document.querySelector('.hero-title.reveal-text');
         if (heroTitle) {
           setTimeout(() => heroTitle.classList.add('active'), 200);
         }
-        const heroImg = document.querySelector('.hero-slot img');
         if (heroImg) {
           setTimeout(() => heroImg.classList.add('active'), 300);
         }
