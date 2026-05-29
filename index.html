@@ -1,0 +1,3050 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hidenothin — The Studio</title>
+  <meta name="description"
+    content="We do what most studios hide. High-fidelity design, engineering, and AI media for forward-thinking companies.">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+    /* Font utility classes as requested by user */
+    .instrument-serif-regular {
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .instrument-serif-regular-italic {
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .jetbrains-mono-light {
+      font-family: "JetBrains Mono", monospace;
+      font-optical-sizing: auto;
+      font-weight: 300;
+      font-style: normal;
+    }
+
+    .jetbrains-mono-regular {
+      font-family: "JetBrains Mono", monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .inter-light {
+      font-family: "Inter", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 300;
+      font-style: normal;
+    }
+
+    .inter-regular {
+      font-family: "Inter", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    /* CSS variables from design.md */
+    :root {
+      /* Colors */
+      --cream: #F2EFE8;
+      --blue: #1F3DD0;
+      --black: #141414;
+      --white: #FFFFFF;
+      --muted: rgba(20, 20, 20, 0.4);
+      --border: rgba(20, 20, 20, 0.12);
+      --card-bg: rgba(20, 20, 20, 0.08);
+      --blue-muted: rgba(255, 255, 255, 0.5);
+
+      /* Fonts */
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'Inter', Helvetica, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+      /* Spacing */
+      --gap-section: clamp(80px, 12vw, 180px);
+      --gap-inner: clamp(24px, 4vw, 64px);
+      --padding-x: clamp(20px, 5vw, 80px);
+
+      /* Type sizes */
+      --num-size: clamp(80px, 12vw, 160px);
+      --h1-size: clamp(36px, 6vw, 72px);
+      --h2-size: clamp(28px, 4vw, 52px);
+      --body-size: 14px;
+      --label-size: 10px;
+      --nav-size: 12px;
+    }
+
+    /* Reset & Base styling */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--cream);
+      color: var(--black);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    a:hover {
+      opacity: 0.7;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    /* Layout structure */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 var(--padding-x);
+    }
+
+    /* Header Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: #F2EFE8;
+      border-bottom: 1px solid #1414142E;
+    }
+
+    header .container {
+      max-width: 1440px;
+      padding-left: 115px;
+      padding-right: 115px;
+    }
+
+    header nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 72px;
+      padding-top: 18px;
+      padding-bottom: 18px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      width: 104px;
+      height: 36px;
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 28px;
+      line-height: 100%;
+      letter-spacing: -0.01em;
+      /* -1% */
+      color: #141414;
+    }
+
+    .nav-links {
+      display: flex;
+      width: 303px;
+      height: 16px;
+      gap: 28px;
+      list-style: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 100%;
+      letter-spacing: 0.08em;
+      /* 8% */
+    }
+
+    .nav-right-label {
+      width: 97px;
+      height: 15px;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 100%;
+      letter-spacing: 0.08em;
+      /* 8% */
+      color: #6B6358;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    /* Section defaults */
+    section {
+      padding-top: var(--gap-section);
+      padding-bottom: var(--gap-section);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-inner);
+      align-items: start;
+    }
+
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: var(--num-size);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      opacity: 0.9;
+    }
+
+    .section-num sup {
+      font-size: 0.45em;
+      font-weight: 300;
+      top: -0.5em;
+      margin-left: 2px;
+    }
+
+    h1,
+    h2 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: var(--h1-size);
+    }
+
+    h2 {
+      font-size: var(--h2-size);
+    }
+
+    em {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .muted-label {
+      font-family: var(--font-mono);
+      font-size: var(--label-size);
+      font-weight: 300;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    /* Hero Section */
+    #hero {
+      padding-top: 48px;
+      padding-bottom: 48px;
+      border-bottom: none;
+    }
+
+    #hero .container {
+      max-width: 1440px;
+      padding-left: 115px;
+      padding-right: 115px;
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    .hero-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 15px;
+    }
+
+    .hero-meta-item {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 100%;
+      letter-spacing: 0.08em;
+      /* 8% */
+      color: #6B6358;
+    }
+
+    #hero .section-grid {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: 589px;
+      justify-content: space-between;
+      align-items: start;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      width: 710px;
+      height: 473px;
+      padding-top: 48px;
+      gap: 40px;
+      justify-content: flex-start;
+    }
+
+    .hero-title {
+      width: 710px;
+      height: auto;
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 124px;
+      line-height: 92%;
+      letter-spacing: -0.02em;
+      /* -2% */
+      margin-bottom: 0;
+      color: #141414;
+    }
+
+    .hero-title em {
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero-tagline {
+      width: 420px;
+      height: 52px;
+      font-family: "Inter", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 17px;
+      line-height: 155%;
+      letter-spacing: 0%;
+      color: #6B6358;
+      margin-bottom: 0;
+    }
+
+    .hero-cta {
+      width: 176px;
+      height: 17px;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 13px;
+      line-height: 100%;
+      letter-spacing: 0.08em;
+      /* 8% */
+      color: #1F3DD0;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      display: inline-block;
+      text-transform: uppercase;
+    }
+
+    .hero-slot-col {
+      width: 420px;
+      height: 589px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 14px;
+    }
+
+    .hero-slot-caption {
+      width: 420px;
+      height: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 100%;
+      letter-spacing: 0.08em;
+      /* 8% */
+      color: #6B6358;
+      text-transform: uppercase;
+    }
+
+    .hero-slot-caption span:last-child {
+      text-align: right;
+    }
+
+    .hero-slot {
+      width: 420px;
+      height: 560px;
+      background-color: #D9D4C8;
+      border: 1px solid #141414;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-slot img {
+      width: 561px;
+      height: 562px;
+      position: absolute;
+      left: -101px;
+      top: 0;
+      object-fit: cover;
+    }
+
+    .hero-slot-label {
+      position: absolute;
+      top: 538px;
+      left: 12px;
+      width: 231px;
+      height: 13px;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 100%;
+      letter-spacing: 0.08em;
+      /* 8% */
+      color: #FFFFFF;
+      opacity: 0.6;
+      /* 60% */
+      pointer-events: none;
+      text-transform: uppercase;
+    }
+
+    .hero-bottom {
+      background-color: #F2EFE8;
+    }
+
+    .hero-bottom .container {
+      max-width: 1440px;
+      padding-left: 115px;
+      padding-right: 115px;
+    }
+
+    .banner-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 63px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+      border-top: 1px solid #1414142E;
+      border-bottom: 1px solid #1414142E;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 100%;
+      letter-spacing: 0.08em;
+      /* 8% */
+      color: #6B6358;
+      text-transform: uppercase;
+    }
+
+    .banner-row span:last-child {
+      text-align: right;
+    }
+
+    .ticker-wrap {
+      width: 100%;
+      height: 54px;
+      overflow: hidden;
+      background-color: #F2EFE8;
+      border-top: 1px solid rgba(20, 20, 20, 0.18);
+      border-bottom: 1px solid rgba(20, 20, 20, 0.18);
+      display: flex;
+      align-items: center;
+    }
+
+    .ticker-wrap .container {
+      max-width: 1440px;
+      width: 100%;
+      padding-left: 115px;
+      padding-right: 115px;
+      overflow: hidden;
+    }
+
+    .ticker {
+      display: flex;
+      white-space: nowrap;
+      width: max-content;
+      animation: ticker-animation 30s linear infinite;
+    }
+
+    .ticker-group {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding-right: 28px;
+    }
+
+    .ticker-group span {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 13px;
+      line-height: 100%;
+      letter-spacing: 0.08em;
+      /* 8% */
+      color: #141414;
+      white-space: nowrap;
+    }
+
+    .ticker-group span.ticker-star {
+      font-size: 14px;
+      color: #1F3DD0;
+      width: 9px;
+      text-align: center;
+    }
+
+    @keyframes ticker-animation {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+
+      100% {
+        transform: translate3d(-50%, 0, 0);
+      }
+    }
+
+    /* What we do Section */
+    #what-we-do {
+      padding-top: 128px;
+      padding-bottom: 64px;
+      height: 548px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    #what-we-do .container {
+      max-width: 1440px;
+      padding-left: 115px;
+      padding-right: 115px;
+    }
+
+    #what-we-do .section-grid {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      height: 216px;
+      align-items: start;
+    }
+
+    .overview-index-col {
+      width: 181px;
+      height: 216px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .overview-num {
+      width: 181px;
+      height: 187px;
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 220px;
+      line-height: 85%;
+      letter-spacing: -0.04em;
+      /* -4% */
+      color: #141414;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .overview-label {
+      width: 134px;
+      height: 15px;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 100%;
+      letter-spacing: 0.08em;
+      /* 8% */
+      color: #6B6358;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .overview-title {
+      width: 610px;
+      height: 110px;
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 116px;
+      line-height: 95%;
+      letter-spacing: -0.02em;
+      /* -2% */
+      text-align: right;
+      color: #141414;
+      margin: 0;
+    }
+
+    .overview-title span {
+      font-family: "Instrument Serif", serif;
+      font-style: normal;
+      color: #141414;
+    }
+
+    .overview-lede-row {
+      display: flex;
+      flex-direction: row;
+      width: 1210px;
+      height: auto;
+      gap: 48px;
+      align-items: flex-start;
+      margin-top: 56px;
+      border-top: 1px solid rgba(20, 20, 20, 0.18);
+      padding-top: 24px;
+    }
+
+    .lede-left {
+      width: 360px;
+      height: 15px;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 11px;
+      line-height: 100%;
+      letter-spacing: 0.08em;
+      /* 8% */
+      color: #6B6358;
+      text-transform: uppercase;
+      text-align: left;
+    }
+
+    .lede-right {
+      width: 802px;
+      height: 68px;
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 28px;
+      line-height: 120%;
+      letter-spacing: -0.01em;
+      /* -1% */
+      color: #141414;
+      margin: 0;
+      text-align: left;
+    }
+
+    /* What we make Section */
+    #what-we-make {
+      background-color: #F2EFE8;
+      border-top: 1px solid rgba(20, 20, 20, 0.18);
+      padding-top: 64px;
+      padding-bottom: 128px;
+      min-height: 3639px;
+    }
+
+    #what-we-make .container {
+      max-width: 1440px;
+      padding-left: 115px;
+      padding-right: 115px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .make-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 1210px;
+      height: 216px;
+      align-items: flex-end;
+    }
+
+    .make-index-col {
+      width: 181px;
+      height: 216px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .make-num {
+      width: 175px;
+      height: 187px;
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 220px;
+      line-height: 85%;
+      letter-spacing: -0.04em;
+      /* -4% */
+      color: #141414;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .make-label {
+      width: 142px;
+      height: 15px;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 100%;
+      letter-spacing: 0.08em;
+      /* 8% */
+      color: #6B6358;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .make-title {
+      width: 475px;
+      height: 91px;
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 96px;
+      line-height: 95%;
+      letter-spacing: -0.01em;
+      /* -1% */
+      text-align: right;
+      color: #141414;
+      margin: 0;
+    }
+
+    .make-title em,
+    .make-title span {
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+    }
+
+    .practices {
+      width: 1210px;
+      border-top: 1px solid rgba(20, 20, 20, 0.18);
+      padding-top: 48px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .practice-row {
+      width: 1210px;
+      min-height: 1053px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: start;
+      border-bottom: 1px solid rgba(20, 20, 20, 0.18);
+      padding-top: 72px;
+      padding-bottom: 88px;
+    }
+
+    .practice-left-col {
+      width: 565px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .practice-num {
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-size: 200px;
+      line-height: 85%;
+      letter-spacing: -0.04em;
+      color: #141414;
+      margin: 0;
+      display: inline-block;
+      width: 171px;
+      height: 170px;
+    }
+
+    .practice-num.blue-star span {
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+      font-size: 100px;
+      color: #1F3DD0;
+      vertical-align: super;
+      line-height: 85%;
+      margin-left: -10px;
+    }
+
+    .practice-num.plus span {
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+      font-size: 100px;
+      color: #1F3DD0;
+      vertical-align: super;
+      line-height: 85%;
+      margin-left: -10px;
+    }
+
+    .practice-eyebrow {
+      width: auto;
+      height: 15px;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 11px;
+      line-height: 100%;
+      letter-spacing: 0.08em;
+      /* 8% */
+      color: #6B6358;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: block;
+      white-space: nowrap;
+    }
+
+    .practice-name {
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 80px;
+      line-height: 95%;
+      letter-spacing: -0.01em;
+      /* -1% */
+      color: #141414;
+      margin-top: 10px;
+      white-space: nowrap;
+    }
+
+    .practice-tagline {
+      font-family: "Inter", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 16px;
+      line-height: 155%;
+      letter-spacing: 0%;
+      color: #6B6358;
+      width: 565px;
+      height: 50px;
+      margin-bottom: 20px;
+    }
+
+    .practice-image-slot {
+      width: 360px;
+      height: 450px;
+      position: relative;
+      background-color: #D9D4C8;
+      border: 1px solid #141414;
+      overflow: hidden;
+    }
+
+    .practice-image-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-label {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: #FFFFFF;
+      opacity: 0.6;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .image-caption {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: #FFFFFF;
+      opacity: 0.6;
+      text-transform: uppercase;
+      z-index: 2;
+    }
+
+    .practice-right-col {
+      width: 565px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      padding-top: 18px;
+    }
+
+    #engineering-practice .practice-left-col {
+      padding-top: 18px;
+      gap: 48px;
+    }
+
+    #engineering-practice .practice-right-col {
+      gap: 24px;
+    }
+
+    .practice-info-grid {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      gap: 40px;
+    }
+
+    .info-subcol {
+      width: 266px;
+    }
+
+    .info-label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 100%;
+      color: #6B6358;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid rgba(20, 20, 20, 0.18);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .info-list {
+      list-style: none;
+    }
+
+    .info-list li {
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 125%;
+      letter-spacing: -0.005em;
+      /* -0.5% */
+      color: #141414;
+      margin-bottom: 12px;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .info-list li::before {
+      content: "+";
+      position: absolute;
+      left: 0;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 400;
+      color: #1F3DD0;
+      line-height: 125%;
+      letter-spacing: -0.005em;
+      /* -0.5% */
+    }
+
+    .practice-timing-col p {
+      font-family: "Inter", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 15px;
+      line-height: 155%;
+      letter-spacing: 0%;
+      color: #6B6358;
+    }
+
+    /* Manifesto Section */
+    #manifesto {
+      background-color: var(--blue);
+      color: #F2EFE8;
+      padding-top: 128px;
+      padding-bottom: 128px;
+      border-bottom: none;
+    }
+
+    #manifesto .container {
+      width: 100%;
+      max-width: 1440px;
+      padding-left: 115px;
+      padding-right: 115px;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+    }
+
+    .manifesto-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 64px;
+    }
+
+    .manifesto-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 100%;
+      letter-spacing: 0.08em;
+      /* 8% */
+      color: rgba(242, 239, 232, 0.65);
+      /* #F2EFE8 at 65% opacity */
+      text-transform: uppercase;
+    }
+
+    .manifesto-lines {
+      width: 1210px;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 80px;
+    }
+
+    .manifesto-lines p {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin: 0;
+      height: 60px;
+    }
+
+    .manifesto-bullet {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 108%;
+      letter-spacing: -0.01em;
+      color: #F2EFE8;
+    }
+
+    .manifesto-text {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4.5vw, 56px);
+      font-weight: 400;
+      line-height: 108%;
+      letter-spacing: -0.01em;
+      color: #F2EFE8;
+    }
+
+    .manifesto-footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 1210px;
+      max-width: 100%;
+      height: 39px;
+      border-top: 1px solid rgba(242, 239, 232, 0.25);
+      /* #F2EFE8 at 25% opacity */
+      padding-top: 24px;
+      align-items: center;
+    }
+
+    .manifesto-footer-item {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 400;
+      line-height: 100%;
+      letter-spacing: 0.08em;
+      color: rgba(242, 239, 232, 0.65);
+      /* #F2EFE8 at 65% opacity */
+      text-transform: uppercase;
+    }
+
+    /* How we work Section */
+    #how-we-work .container {
+      max-width: 1440px;
+      padding-left: 115px;
+      padding-right: 115px;
+    }
+
+    .work-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 1210px;
+      height: 216px;
+      align-items: flex-end;
+      margin-bottom: 64px;
+    }
+
+    .work-index-col {
+      width: 120px;
+      height: 216px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .work-num {
+      width: auto;
+      height: 187px;
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 220px;
+      line-height: 85%;
+      letter-spacing: -0.04em;
+      /* -4% */
+      color: #141414;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .work-label {
+      width: auto;
+      height: 15px;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 100%;
+      letter-spacing: 0.08em;
+      /* 8% */
+      color: #6B6358;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .work-title {
+      width: 475px;
+      height: 91px;
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 96px;
+      line-height: 95%;
+      letter-spacing: -0.01em;
+      /* -1% */
+      text-align: right;
+      color: #141414;
+      margin: 0;
+    }
+
+    .work-title span {
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+    }
+
+    .work-rows {
+      width: 1210px;
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid rgba(20, 20, 20, 0.12);
+    }
+
+    .work-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(20, 20, 20, 0.12);
+      padding-top: 32px;
+      padding-bottom: 32px;
+      gap: 48px;
+    }
+
+    .work-col-label {
+      width: 200px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 400;
+      color: #6B6358;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .work-col-heading {
+      width: 500px;
+      font-family: "Instrument Serif", serif;
+      font-size: 28px;
+      line-height: 120%;
+      color: #141414;
+    }
+
+    .work-col-desc {
+      width: 400px;
+      font-family: "Inter", sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #6B6358;
+      border-left: 1px solid rgba(20, 20, 20, 0.12);
+      padding-left: 24px;
+    }
+
+    /* The Studio Section */
+    #studio .container {
+      max-width: 1440px;
+      padding-left: 115px;
+      padding-right: 115px;
+    }
+
+    .studio-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 1210px;
+      height: 216px;
+      align-items: flex-end;
+      margin-bottom: 120px;
+    }
+
+    .studio-index-col {
+      width: 120px;
+      height: 216px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .studio-num {
+      width: auto;
+      height: 187px;
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 220px;
+      line-height: 85%;
+      letter-spacing: -0.04em;
+      /* -4% */
+      color: #141414;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .studio-label {
+      width: auto;
+      height: 15px;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 100%;
+      letter-spacing: 0.08em;
+      /* 8% */
+      color: #6B6358;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .studio-title {
+      width: 475px;
+      height: 91px;
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 96px;
+      line-height: 95%;
+      letter-spacing: -0.01em;
+      /* -1% */
+      text-align: right;
+      color: #141414;
+      margin: 0;
+    }
+
+    .studio-title span {
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+    }
+
+    .founder-row {
+      width: 1210px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 96px;
+      border-width: 1px 0px 1px 0px;
+      border-style: solid;
+      border-color: #1414142E;
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+
+    .founder-bio-col {
+      width: 565px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .founder-label-row {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .founder-label-row span {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 400;
+      color: #6B6358;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .founder-label-row.footer-labels {
+      border-bottom: none;
+      border-top: none;
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-top: 0;
+    }
+
+    .founder-name {
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-size: 80px;
+      line-height: 95%;
+      letter-spacing: -0.01em;
+      color: #141414;
+      margin-top: 10px;
+    }
+
+    .founder-name span {
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+      color: #1F3DD0;
+    }
+
+    .founder-role {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 400;
+      color: #6B6358;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .founder-bio {
+      font-family: "Instrument Serif", serif;
+      font-size: 24px;
+      line-height: 1.5;
+      color: #141414;
+      margin-top: 10px;
+    }
+
+    .founder-card-col {
+      width: 565px;
+    }
+
+    .founder-card {
+      width: 565px;
+      height: 706px;
+      background-color: #D9D4C8;
+      position: relative;
+    }
+
+    .founder-card .card-top-label {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: #6B6358;
+      text-transform: uppercase;
+    }
+
+    .founder-card .card-bottom-label {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: #6B6358;
+      text-transform: uppercase;
+    }
+
+    .team-grid {
+      width: 1210px;
+      display: grid;
+      grid-template-columns: repeat(5, 222px);
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .team-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .team-avatar-box {
+      width: 222px;
+      height: 222px;
+      background-color: #D9D4C8;
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    .team-avatar-box .avatar-num {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      font-weight: 400;
+      color: #6B6358;
+    }
+
+    .team-avatar-box .avatar-label {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: #6B6358;
+      text-transform: uppercase;
+    }
+
+    .team-card .team-name {
+      font-family: "Instrument Serif", serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: #141414;
+      margin-bottom: 4px;
+    }
+
+    .team-card .team-role {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      font-weight: 400;
+      color: #6B6358;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .team-card .team-bio {
+      font-family: "Inter", sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #6B6358;
+    }
+
+    /* Start a Project Section */
+    #start {
+      padding-top: 160px;
+      padding-bottom: 64px;
+    }
+
+    #start .container {
+      max-width: 1440px;
+      padding-left: 115px;
+      padding-right: 115px;
+    }
+
+    .start-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 1210px;
+      height: 216px;
+      align-items: flex-end;
+      margin-bottom: 32px;
+      border-bottom: 1px solid #1414142E;
+      padding-bottom: 48px;
+    }
+
+    .start-index-col {
+      width: 120px;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+
+    .start-num {
+      width: auto;
+      height: auto;
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 220px;
+      line-height: 85%;
+      letter-spacing: -0.04em;
+      color: #141414;
+      margin: 0;
+    }
+
+    .start-label {
+      width: auto;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 100%;
+      letter-spacing: 0.08em;
+      color: #6B6358;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .start-title {
+      width: auto;
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 96px;
+      line-height: 95%;
+      letter-spacing: -0.01em;
+      color: #141414;
+      margin: 0;
+    }
+
+    .start-title span {
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+    }
+
+    .start-tagline {
+      width: 1210px;
+      max-width: 100%;
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(24px, 3.5vw, 32px);
+      line-height: 130%;
+      color: #141414;
+      margin-top: 48px;
+      margin-bottom: 64px;
+    }
+
+    .start-tagline span {
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+      color: #1F3DD0;
+    }
+
+    .start-form-grid {
+      width: 1210px;
+      display: grid;
+      grid-template-columns: 565px 565px;
+      justify-content: space-between;
+      row-gap: 40px;
+      margin-bottom: 64px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border-bottom: 1px solid rgba(20, 20, 20, 0.12);
+      padding-bottom: 12px;
+      position: relative;
+    }
+
+    .form-group label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: #6B6358;
+      text-transform: uppercase;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      border: none;
+      background: transparent;
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+      font-size: 20px;
+      color: #6B6358;
+      padding: 0;
+      width: 100%;
+      outline: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    .form-group select {
+      cursor: pointer;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(107, 99, 88, 0.6);
+    }
+
+    .form-group textarea {
+      resize: none;
+      height: 30px;
+    }
+
+    .select-arrow {
+      position: absolute;
+      right: 0;
+      bottom: 12px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      color: #6B6358;
+      pointer-events: none;
+    }
+
+    .submit-btn-container {
+      width: 1210px;
+    }
+
+    .submit-btn {
+      border: none;
+      background: transparent;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: #141414;
+      text-transform: uppercase;
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid #141414;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .submit-btn span {
+      color: #1F3DD0;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--cream);
+      padding: 80px 0 40px 0;
+    }
+
+    #footer-section .container {
+      max-width: 1440px;
+      padding-left: 115px;
+      padding-right: 115px;
+    }
+
+    .footer-wordmark {
+      font-family: "Instrument Serif", serif;
+      font-size: 156px;
+      font-weight: 400;
+      line-height: 100%;
+      letter-spacing: -0.03em;
+      color: #141414;
+      margin-bottom: 64px;
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 300px 300px auto;
+      width: 1210px;
+      gap: 40px;
+      align-items: start;
+      margin-bottom: 80px;
+    }
+
+    .footer-col h4 {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 400;
+      color: #6B6358;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      letter-spacing: 0.08em;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-col ul a {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 400;
+      color: #141414;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .footer-col.say-hello-col {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .footer-col.say-hello-col .footer-email {
+      font-family: "Instrument Serif", serif;
+      font-size: 32px;
+      font-weight: 400;
+      color: #141414;
+      border-bottom: none;
+      padding-bottom: 0;
+      text-transform: none;
+      letter-spacing: 0;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 1210px;
+      border-top: 1px solid #1414142E;
+      padding-top: 24px;
+      margin-top: 0;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      color: #6B6358;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Mobile Hamburger Menu */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 101;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 1px;
+      background-color: var(--black);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1024px) {
+      .section-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      #hero .section-grid {
+        flex-direction: column;
+        height: auto;
+        gap: 32px;
+      }
+
+      .hero-content {
+        width: 100%;
+        height: auto;
+        padding-top: 0;
+        gap: 24px;
+      }
+
+      .hero-title {
+        font-size: clamp(48px, 10vw, 80px);
+        width: 100%;
+        height: auto;
+      }
+
+      .hero-tagline {
+        width: 100%;
+        height: auto;
+      }
+
+      .hero-slot-col {
+        width: 100%;
+        height: auto;
+      }
+
+      .hero-slot {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3/4;
+      }
+
+      .hero-slot img {
+        width: 100%;
+        height: 100%;
+        position: static;
+      }
+
+      .hero-bottom .container {
+        padding-left: var(--padding-x);
+        padding-right: var(--padding-x);
+      }
+
+      .banner-row {
+        flex-direction: column;
+        height: auto;
+        gap: 12px;
+        text-align: center;
+        padding-top: 16px;
+        padding-bottom: 16px;
+      }
+
+      .ticker-wrap .container {
+        padding-left: var(--padding-x);
+        padding-right: var(--padding-x);
+      }
+
+      #what-we-do {
+        height: auto;
+        padding-top: 64px;
+        padding-bottom: 48px;
+      }
+
+      #what-we-do .section-grid {
+        flex-direction: column;
+        height: auto;
+        gap: 32px;
+      }
+
+      .overview-index-col {
+        height: auto;
+        width: 100%;
+      }
+
+      .overview-num {
+        font-size: clamp(100px, 15vw, 150px);
+        height: auto;
+        width: auto;
+      }
+
+      .overview-title {
+        width: 100%;
+        height: auto;
+        font-size: clamp(40px, 8vw, 72px);
+        text-align: left;
+      }
+
+      .overview-lede-row {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        gap: 24px;
+        margin-top: 32px;
+      }
+
+      .lede-left {
+        width: 100%;
+        height: auto;
+      }
+
+      .lede-right {
+        width: 100%;
+        height: auto;
+        font-size: 20px;
+        text-align: left;
+      }
+
+      #what-we-make {
+        height: auto;
+        padding-top: 64px;
+        padding-bottom: 64px;
+      }
+
+      .make-header {
+        flex-direction: column;
+        height: auto;
+        gap: 32px;
+        width: 100%;
+        align-items: flex-start;
+      }
+
+      .make-index-col {
+        height: auto;
+        width: 100%;
+      }
+
+      .make-num {
+        font-size: clamp(100px, 15vw, 150px);
+        height: auto;
+        width: auto;
+      }
+
+      .make-title {
+        width: 100%;
+        height: auto;
+        font-size: clamp(40px, 8vw, 72px);
+        text-align: left;
+      }
+
+      .work-header {
+        flex-direction: column;
+        height: auto;
+        gap: 32px;
+        width: 100%;
+        align-items: flex-start;
+      }
+
+      .work-index-col {
+        height: auto;
+        width: 100%;
+      }
+
+      .work-num {
+        font-size: clamp(100px, 15vw, 150px);
+        height: auto;
+        width: auto;
+      }
+
+      .work-title {
+        width: 100%;
+        height: auto;
+        font-size: clamp(40px, 8vw, 72px);
+        text-align: left;
+      }
+
+      .work-rows {
+        width: 100%;
+      }
+
+      .work-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        padding-top: 24px;
+        padding-bottom: 24px;
+      }
+
+      .work-col-label,
+      .work-col-heading,
+      .work-col-desc {
+        width: 100%;
+      }
+
+      .work-col-desc {
+        border-left: none;
+        border-top: 1px solid rgba(20, 20, 20, 0.12);
+        padding-left: 0;
+        padding-top: 16px;
+      }
+
+      .studio-header {
+        flex-direction: column;
+        height: auto;
+        gap: 32px;
+        width: 100%;
+        align-items: flex-start;
+      }
+
+      .studio-index-col {
+        height: auto;
+        width: 100%;
+      }
+
+      .studio-num {
+        font-size: clamp(100px, 15vw, 150px);
+        height: auto;
+        width: auto;
+      }
+
+      .studio-title {
+        width: 100%;
+        height: auto;
+        font-size: clamp(40px, 8vw, 72px);
+        text-align: left;
+      }
+
+      .founder-row {
+        flex-direction: column;
+        width: 100%;
+        gap: 48px;
+      }
+
+      .founder-bio-col,
+      .founder-card-col,
+      .founder-card {
+        width: 100%;
+      }
+
+      .founder-card {
+        height: auto;
+        aspect-ratio: 4/5;
+      }
+
+      .team-grid {
+        width: 100%;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 32px;
+      }
+
+      .team-avatar-box {
+        width: 100%;
+        aspect-ratio: 1;
+        height: auto;
+      }
+
+      .practices {
+        width: 100%;
+        padding-top: 32px;
+      }
+
+      .practice-row {
+        flex-direction: column;
+        width: 100%;
+        gap: 48px;
+        padding-top: 48px;
+        padding-bottom: 48px;
+        min-height: auto;
+      }
+
+      .practice-left-col,
+      .practice-right-col {
+        width: 100%;
+      }
+
+      .practice-image-slot {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4/5;
+      }
+
+      .practice-info-grid {
+        flex-direction: column;
+        gap: 32px;
+      }
+
+      .info-subcol {
+        width: 100%;
+      }
+
+      .start-header {
+        flex-direction: column;
+        height: auto;
+        gap: 32px;
+        width: 100%;
+        align-items: flex-start;
+      }
+
+      .start-index-col {
+        height: auto;
+        width: 100%;
+      }
+
+      .start-num {
+        font-size: clamp(100px, 15vw, 150px);
+        height: auto;
+        width: auto;
+      }
+
+      .start-title {
+        width: 100%;
+        height: auto;
+        font-size: clamp(40px, 8vw, 72px);
+        text-align: left;
+      }
+
+      .start-tagline {
+        width: 100%;
+      }
+
+      .start-form-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+        row-gap: 32px;
+      }
+
+      .submit-btn-container {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      :root {
+        --gap-section: 64px;
+        --padding-x: 24px;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background-color: var(--cream);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        border-left: 1px solid var(--border);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.03);
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .nav-links a {
+        font-size: 18px;
+      }
+
+      .menu-toggle.active span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle.active span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      header .container,
+      #hero .container,
+      #what-we-do .container,
+      #what-we-make .container,
+      #manifesto .container,
+      #how-we-work .container,
+      #studio .container,
+      #start .container,
+      #footer-section .container {
+        padding-left: var(--padding-x);
+        padding-right: var(--padding-x);
+      }
+
+      .nav-right-label {
+        display: none;
+      }
+
+      /* Form mobile input scaling to prevent iOS auto-zoom */
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        font-size: 16px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        width: 100%;
+        gap: 32px;
+        margin-bottom: 48px;
+      }
+
+      .footer-col.say-hello-col {
+        text-align: left;
+        align-items: flex-start;
+      }
+
+      .footer-bottom {
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      :root {
+        --padding-x: 20px;
+        --gap-section: 48px;
+      }
+
+      body {
+        font-size: 13px;
+      }
+
+      /* Typographic scale constraints for small mobiles */
+      .hero-title {
+        font-size: clamp(38px, 9.5vw, 56px);
+      }
+
+      .overview-num,
+      .make-num,
+      .work-num,
+      .studio-num,
+      .start-num {
+        font-size: clamp(80px, 18vw, 110px);
+      }
+
+      .overview-title,
+      .make-title,
+      .work-title,
+      .studio-title,
+      .start-title {
+        font-size: clamp(34px, 8.5vw, 44px);
+      }
+
+      .practice-name {
+        font-size: clamp(40px, 10vw, 56px);
+      }
+
+      .founder-name {
+        font-size: clamp(40px, 10vw, 56px);
+      }
+
+      .footer-wordmark {
+        font-size: clamp(48px, 12vw, 96px);
+        margin-bottom: 32px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .footer-col:last-child {
+        grid-column: span 1;
+      }
+    }
+
+    /* Premium Animations */
+    .reveal-text .reveal-line {
+      display: block;
+      overflow: hidden;
+      line-height: 110%;
+      padding-bottom: 0.05em;
+    }
+    .reveal-text .reveal-inner {
+      display: block;
+      transform: translateY(100%);
+      opacity: 0;
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.2s ease;
+    }
+    .reveal-text.active .reveal-inner {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .reveal-text .reveal-line:nth-child(1) .reveal-inner { transition-delay: 0.1s; }
+    .reveal-text .reveal-line:nth-child(2) .reveal-inner { transition-delay: 0.23s; }
+    .reveal-text .reveal-line:nth-child(3) .reveal-inner { transition-delay: 0.36s; }
+
+    /* Section Numbers scale and rotate reveal */
+    .reveal-num {
+      opacity: 0;
+      transform: scale(0.85) rotate(-4deg);
+      transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transform-origin: center center;
+      will-change: transform, opacity;
+    }
+    .reveal-num.active {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+
+    /* Clip Path image reveal */
+    .reveal-clip {
+      clip-path: inset(100% 0 0 0);
+      transition: clip-path 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: clip-path;
+    }
+    .reveal-clip.active {
+      clip-path: inset(0% 0 0 0);
+    }
+
+    /* Magnetic CTA Button */
+    .magnetic-btn {
+      display: inline-flex;
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* Sound/Music Toggle Button and Equalizer */
+    .sound-toggle-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sound-toggle-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 12px;
+      padding: 4px;
+      box-sizing: content-box;
+      outline: none;
+      transition: opacity 0.2s ease;
+    }
+    .sound-toggle-btn:hover {
+      opacity: 0.7;
+    }
+    .sound-icon-bar {
+      width: 2px;
+      background-color: var(--black);
+      transform-origin: bottom;
+      transition: height 0.2s ease;
+    }
+    /* Animated state for bars when playing */
+    .sound-toggle-btn.playing .sound-icon-bar {
+      animation: sound-wave-bar 1.2s ease-in-out infinite alternate;
+    }
+    .sound-toggle-btn.playing .sound-icon-bar:nth-child(1) { animation-delay: 0.1s; height: 12px; }
+    .sound-toggle-btn.playing .sound-icon-bar:nth-child(2) { animation-delay: 0.3s; height: 12px; }
+    .sound-toggle-btn.playing .sound-icon-bar:nth-child(3) { animation-delay: 0.2s; height: 12px; }
+    .sound-toggle-btn.playing .sound-icon-bar:nth-child(4) { animation-delay: 0.4s; height: 12px; }
+    
+    /* Static paused state heights */
+    .sound-toggle-btn:not(.playing) .sound-icon-bar:nth-child(1) { height: 3px; }
+    .sound-toggle-btn:not(.playing) .sound-icon-bar:nth-child(2) { height: 6px; }
+    .sound-toggle-btn:not(.playing) .sound-icon-bar:nth-child(3) { height: 5px; }
+    .sound-toggle-btn:not(.playing) .sound-icon-bar:nth-child(4) { height: 3px; }
+
+    @keyframes sound-wave-bar {
+      0% {
+        transform: scaleY(0.25);
+      }
+      100% {
+        transform: scaleY(1);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="logo instrument-serif-regular">hidenothin</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#hero">WORK</a></li>
+          <li><a href="#design">SERVICES</a></li>
+          <li><a href="#how-we-work">APPROACH</a></li>
+          <li><a href="#start">CONTACT</a></li>
+        </ul>
+        <div class="sound-toggle-container">
+          <button id="soundToggle" class="sound-toggle-btn" aria-label="Toggle Background Music">
+            <span class="sound-icon-bar"></span>
+            <span class="sound-icon-bar"></span>
+            <span class="sound-icon-bar"></span>
+            <span class="sound-icon-bar"></span>
+          </button>
+          <span class="nav-right-label" style="margin-left: 4px;">N072 / STUDIO</span>
+        </div>
+      </nav>
+      <!-- Background Audio -->
+      <audio id="bgAudio" src="the_mountain-calm-hopeful-310095.mp3" loop></audio>
+    </div>
+  </header>
+
+  <section id="hero">
+    <div class="container">
+      <div class="hero-meta-row">
+        <span class="hero-meta-item">N01 / HIDENOTHIN</span>
+        <span class="hero-meta-item">THE STUDIO / EST. 2025</span>
+      </div>
+      <div class="section-grid">
+        <div class="hero-content">
+          <h1 class="hero-title reveal-text">
+            <span class="reveal-line"><span class="reveal-inner">We do what</span></span>
+            <span class="reveal-line"><span class="reveal-inner">most studios</span></span>
+            <span class="reveal-line"><span class="reveal-inner"><em>hide.</em></span></span>
+          </h1>
+          <p class="hero-tagline">A design, engineering, and Al media studio. Our process, people, and pricing are all
+            on this page.</p>
+          <a href="#start" class="hero-cta magnetic-btn">* START A PROJECT &rarr;</a>
+        </div>
+        <div class="hero-slot-col">
+          <div class="hero-slot">
+            <img src="hero_chair.png" alt="Hero studio still life" class="reveal-clip parallax-img">
+            <div class="hero-slot-label">[ 3:4 / HERO / STUDIO STILL LIFE ]</div>
+          </div>
+          <div class="hero-slot-caption">
+            <span>FIG. 01</span>
+            <span>+ THE STUDIO AT WORK</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero Bottom Banner -->
+  <div class="hero-bottom">
+    <div class="container">
+      <div class="banner-row">
+        <span>DESIGN / ENGINEERING / AI MEDIA</span>
+        <span>+ BASED IN PRINT, BUILT FOR SCREENS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Moving Marquee Ticker -->
+  <div class="ticker-wrap">
+    <div class="container">
+      <div class="ticker">
+        <!-- Group 1 -->
+        <div class="ticker-group">
+          <span>BRAND IDENTITY</span><span class="ticker-star">*</span>
+          <span>WEB DESIGN</span><span class="ticker-star">*</span>
+          <span>PRODUCT DESIGN</span><span class="ticker-star">*</span>
+          <span>MOTION</span><span class="ticker-star">*</span>
+          <span>WEB DEVELOPMENT</span><span class="ticker-star">*</span>
+          <span>FULL-STACK APPS</span><span class="ticker-star">*</span>
+          <span>AI IMAGE</span><span class="ticker-star">*</span>
+          <span>AI VIDEO</span><span class="ticker-star">*</span>
+          <span>GENERATIVE SYSTEMS</span><span class="ticker-star">*</span>
+        </div>
+        <!-- Group 2 (Duplicate for infinite looping scroll) -->
+        <div class="ticker-group">
+          <span>BRAND IDENTITY</span><span class="ticker-star">*</span>
+          <span>WEB DESIGN</span><span class="ticker-star">*</span>
+          <span>PRODUCT DESIGN</span><span class="ticker-star">*</span>
+          <span>MOTION</span><span class="ticker-star">*</span>
+          <span>WEB DEVELOPMENT</span><span class="ticker-star">*</span>
+          <span>FULL-STACK APPS</span><span class="ticker-star">*</span>
+          <span>AI IMAGE</span><span class="ticker-star">*</span>
+          <span>AI VIDEO</span><span class="ticker-star">*</span>
+          <span>GENERATIVE SYSTEMS</span><span class="ticker-star">*</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- What We Do -->
+  <section id="what-we-do">
+    <div class="container">
+      <div class="section-grid">
+        <div class="overview-index-col">
+          <h2 class="overview-num reveal-num">02</h2>
+          <span class="overview-label">SECTION / OVERVIEW</span>
+        </div>
+        <h2 class="overview-title">What we do <span>( <span style="color: var(--blue);">*</span> )</span></h2>
+      </div>
+      <div class="overview-lede-row">
+        <span class="lede-left">+ THREE PRACTICES, ONE TEAM</span>
+        <p class="lede-right">We design, build, and produce media for companies that would rather hire one studio than
+          three. The detail is below.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Make Section -->
+  <section id="what-we-make">
+    <div class="container">
+      <!-- Do Frame Header -->
+      <div class="make-header">
+        <div class="make-index-col">
+          <h2 class="make-num reveal-num">03</h2>
+          <span class="make-label">SECTION / IN DETAIL</span>
+        </div>
+        <h2 class="make-title">What we <span>make</span></h2>
+      </div>
+
+      <!-- Practices Container -->
+      <div class="practices">
+        <!-- 01* Design -->
+        <div class="practice-row" id="design-practice">
+          <div class="practice-left-col">
+            <span class="practice-eyebrow">01 / PRACTICE</span>
+            <h3 class="practice-num blue-star reveal-num">01<span>*</span></h3>
+            <h4 class="practice-name">Design</h4>
+            <p class="practice-tagline">Identity, interface, and the print-thinking that ties them together. We design
+              systems people can hand to anyone and still recognise.</p>
+            <div class="practice-image-slot">
+              <span class="image-label">01 / DESIGN</span>
+              <img src="design_flowers.png" alt="Design flowers" class="reveal-clip">
+              <span class="image-caption">[ 4:5 / BRAND / IDENTITY SYSTEM ]</span>
+            </div>
+          </div>
+          <div class="practice-right-col">
+            <div class="practice-info-grid">
+              <div class="info-subcol">
+                <span class="info-label">SUB-PRACTICES</span>
+                <ul class="info-list">
+                  <li>Brand identity</li>
+                  <li>Visual systems and tokens</li>
+                  <li>Web and product design</li>
+                  <li>Editorial and print</li>
+                  <li>Motion and micro-interaction</li>
+                </ul>
+              </div>
+              <div class="info-subcol">
+                <span class="info-label">TYPICAL DELIVERABLES</span>
+                <ul class="info-list">
+                  <li>Logotype, wordmark, type system</li>
+                  <li>Brand book and usage rules</li>
+                  <li>Figma library and components</li>
+                  <li>Full site or product UI, ready to build</li>
+                  <li>Motion principles and reels</li>
+                </ul>
+              </div>
+            </div>
+            <div class="practice-timing-col">
+              <span class="info-label">TIMING / GOOD FIT FOR</span>
+              <p>Brand sprints run 3 to 6 weeks. Full identity systems run 6 to 10. Web and product design moves in
+                parallel with engineering. Good fit for founders rebranding before a raise, or companies whose product
+                has outgrown its first identity.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02+ Engineering -->
+        <div class="practice-row" id="engineering-practice">
+          <div class="practice-left-col">
+            <div class="practice-info-grid">
+              <div class="info-subcol">
+                <span class="info-label">SUB-PRACTICES</span>
+                <ul class="info-list">
+                  <li>Marketing and editorial sites</li>
+                  <li>Web apps and dashboards</li>
+                  <li>Full-stack product builds</li>
+                  <li>CMS, headless, content tooling</li>
+                  <li>Performance and accessibility audits</li>
+                </ul>
+              </div>
+              <div class="info-subcol">
+                <span class="info-label">STACK WE LIKE</span>
+                <ul class="info-list">
+                  <li>Next.js, Astro, SvelteKit</li>
+                  <li>TypeScript end-to-end</li>
+                  <li>Postgres, Prisma, Drizzle</li>
+                  <li>Sanity, Payload, or your CMS</li>
+                  <li>Vercel, Fly, Cloudflare</li>
+                </ul>
+              </div>
+            </div>
+            <div class="practice-timing-col">
+              <span class="info-label">TIMING &nbsp; / &nbsp; GOOD FIT FOR</span>
+              <p>Landing sites run 4 to 8 weeks. Product builds run 8 to 16, shipped in small releases instead of one
+                big launch. Good fit for teams who want their site, app, and brand to come out of one head, and founders
+                who would rather skip the agency-to-dev-shop handoff.</p>
+            </div>
+          </div>
+          <div class="practice-right-col">
+            <span class="practice-eyebrow">02 / PRACTICE</span>
+            <h3 class="practice-num plus reveal-num">02<span>+</span></h3>
+            <h4 class="practice-name">Engineering</h4>
+            <p class="practice-tagline">We build the sites and apps we design. Same people, same room, no handoff to a
+              vendor we have never met.</p>
+            <div class="practice-image-slot">
+              <span class="image-label">02 / BUILD</span>
+              <img src="02+build.png" alt="Engineering build" class="reveal-clip">
+              <span class="image-caption">[ 4:5 / ENGINEERING / SHIPPED PRODUCT ]</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03* AI Media -->
+        <div class="practice-row" id="aimedia-practice" style="border-bottom: none;">
+          <div class="practice-left-col">
+            <span class="practice-eyebrow">03 / PRACTICE</span>
+            <h3 class="practice-num blue-star reveal-num">03<span>*</span></h3>
+            <h4 class="practice-name">AI media</h4>
+            <p class="practice-tagline">Image and video built with generative tools, kept in your visual language. We
+              treat AI as a craft, not a shortcut.</p>
+            <div class="practice-image-slot">
+              <span class="image-label">03 / AI MEDIA</span>
+              <img src="03build.png" alt="AI media still" class="reveal-clip">
+              <span class="image-caption">[ 4:5 / GENERATIVE STILL / LAUNCH FILM FRAME ]</span>
+            </div>
+          </div>
+          <div class="practice-right-col">
+            <div class="practice-info-grid">
+              <div class="info-subcol">
+                <span class="info-label">SUB-PRACTICES</span>
+                <ul class="info-list">
+                  <li>AI image direction and production</li>
+                  <li>AI video, launch films, short-form</li>
+                  <li>Custom generative visual systems</li>
+                  <li>Style references and trained looks</li>
+                  <li>Pipelines your team can run later</li>
+                </ul>
+              </div>
+              <div class="info-subcol">
+                <span class="info-label">TOOLS WE RUN</span>
+                <ul class="info-list">
+                  <li>Midjourney, Flux, SDXL</li>
+                  <li>Runway, Veo, Sora</li>
+                  <li>ComfyUI for repeatable pipelines</li>
+                  <li>Custom LoRAs and reference packs</li>
+                  <li>Finishing in After Effects, DaVinci</li>
+                </ul>
+              </div>
+            </div>
+            <div class="practice-timing-col">
+              <span class="info-label">TIMING &nbsp; / &nbsp; GOOD FIT FOR</span>
+              <p>A still campaign runs 1 to 3 weeks. A short film runs 2 to 4. Generative systems are ongoing and handed
+                back to your team when ready. Good fit for brands that need a lot of visuals on a small budget, and
+                product teams who want a look they can keep producing in-house.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Manifesto / Blue Block -->
+  <section id="manifesto">
+    <div class="container">
+      <div class="manifesto-header">
+        <span class="manifesto-label">04 / Manifesto</span>
+        <span class="manifesto-label">+ hidenothin</span>
+      </div>
+      <div class="manifesto-lines">
+        <p><span class="manifesto-bullet">*</span> <span class="manifesto-text">We scope before we start.</span></p>
+        <p><span class="manifesto-bullet">*</span> <span class="manifesto-text">We name the people doing the
+            work.</span></p>
+        <p><span class="manifesto-bullet">*</span> <span class="manifesto-text">We do not outsource and pretend
+            otherwise.</span></p>
+        <p><span class="manifesto-bullet">*</span> <span class="manifesto-text">We send one shared doc, not a
+            deck.</span></p>
+        <p><span class="manifesto-bullet">*</span> <span class="manifesto-text">We say no when a project is wrong for
+            us.</span></p>
+        <p><span class="manifesto-bullet">*</span> <span class="manifesto-text">If the work is bad, you should be able
+            to see that too.</span></p>
+      </div>
+      <div class="manifesto-footer">
+        <span class="manifesto-footer-item">hidenothin / 2025</span>
+        <span class="manifesto-footer-item">+ all work, no smoke</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- How We Work -->
+  <section id="how-we-work">
+    <div class="container">
+      <div class="work-header">
+        <div class="work-index-col">
+          <h2 class="work-num reveal-num">05</h2>
+          <span class="work-label">SECTION / TRANSPARENCY</span>
+        </div>
+        <h2 class="work-title">How we <span>work</span></h2>
+      </div>
+
+      <div class="work-rows">
+        <div class="work-row">
+          <div class="work-col-label">ENGAGEMENT</div>
+          <div class="work-col-heading">4 to 12 weeks, start to ship.</div>
+          <div class="work-col-desc">Most projects land between six and eight. We tell you the realistic number on the
+            call.</div>
+        </div>
+        <div class="work-row">
+          <div class="work-col-label">PRICING</div>
+          <div class="work-col-heading">We talk it through on the first call.</div>
+          <div class="work-col-desc">Scoped to the work, quoted before we start. No hidden line items, no surprise
+            invoices.</div>
+        </div>
+        <div class="work-row">
+          <div class="work-col-label">WHO WORKS ON IT</div>
+          <div class="work-col-heading">The named team below.</div>
+          <div class="work-col-desc">No account managers. No junior hand-off. You speak to the people drawing and
+            writing the code.</div>
+        </div>
+        <div class="work-row">
+          <div class="work-col-label">OUTSOURCED</div>
+          <div class="work-col-heading">Nothing. We do the work.</div>
+          <div class="work-col-desc">If a project genuinely needs a specialist we trust, we say so and introduce you
+            directly.</div>
+        </div>
+        <div class="work-row">
+          <div class="work-col-label">COMMUNICATION</div>
+          <div class="work-col-heading">One shared doc. One weekly call.</div>
+          <div class="work-col-desc">No decks. The doc is yours to keep after the project ends.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Studio -->
+  <section id="studio">
+    <div class="container">
+      <div class="studio-header">
+        <div class="studio-index-col">
+          <h2 class="studio-num reveal-num">06</h2>
+          <span class="studio-label">SECTION / PEOPLE</span>
+        </div>
+        <h2 class="studio-title">The <span>studio</span></h2>
+      </div>
+
+      <div class="founder-row">
+        <div class="founder-bio-col">
+          <div class="founder-label-row">
+            <span>01 / FOUNDER</span>
+            <span>+ ON THE CALL FROM DAY ONE</span>
+          </div>
+          <h3 class="founder-name">Anuj <span>Tewari</span></h3>
+          <span class="founder-role">FOUNDER &nbsp; / &nbsp; DESIGN, DIRECTION</span>
+          <p class="founder-bio">
+            Started hidenothin to stop hiding the work. Spends his weeks between the brief, the file, and the call.
+            Believes a studio is only as honest as the page it puts on the internet about itself. Refuses to use the
+            word "ecosystem."
+          </p>
+          <div class="founder-label-row footer-labels">
+            <span>BASED IN / NEW DELHI</span>
+            <span>+ TEN YEARS IN DESIGN</span>
+          </div>
+        </div>
+        <div class="founder-card-col">
+          <div class="founder-card">
+            <span class="card-top-label">01 / FOUNDER</span>
+            <span class="card-bottom-label">[ 4:5 / PORTRAIT / ANUJ TEWARI ]</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar-box">
+            <span class="avatar-num">02</span>
+            <span class="avatar-label">[ 1:1 / PRIYA VANCE ]</span>
+          </div>
+          <h4 class="team-name">Priya Vance</h4>
+          <span class="team-role">ENGINEERING LEAD</span>
+          <p class="team-bio">Builds the things we ship. Writes Rust on weekends.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar-box">
+            <span class="avatar-num">03</span>
+            <span class="avatar-label">[ 1:1 / THEO KADE ]</span>
+          </div>
+          <h4 class="team-name">Theo Kade</h4>
+          <span class="team-role">DESIGN</span>
+          <p class="team-bio">Identity, type, packaging. Trained as a printer first.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar-box">
+            <span class="avatar-num">04</span>
+            <span class="avatar-label">[ 1:1 / MIRA OLSEN ]</span>
+          </div>
+          <h4 class="team-name">Mira Olsen</h4>
+          <span class="team-role">AI MEDIA</span>
+          <p class="team-bio">Image and video pipelines. Came from a VFX house.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar-box">
+            <span class="avatar-num">05</span>
+            <span class="avatar-label">[ 1:1 / JULES PARK ]</span>
+          </div>
+          <h4 class="team-name">Jules Park</h4>
+          <span class="team-role">PRODUCER</span>
+          <p class="team-bio">Keeps the work on time. Not making a Gantt chart.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar-box">
+            <span class="avatar-num">06</span>
+            <span class="avatar-label">[ 1:1 / SAM REYES ]</span>
+          </div>
+          <h4 class="team-name">Sam Reyes</h4>
+          <span class="team-role">ENGINEERING</span>
+          <p class="team-bio">Full-stack. Cares about page weight.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Start a Project -->
+  <section id="start">
+    <div class="container">
+      <div class="start-header">
+        <div class="start-index-col">
+          <h2 class="start-num reveal-num">07</h2>
+          <span class="start-label">SECTION / CONTACT</span>
+        </div>
+        <h2 class="start-title">Start a <span>project</span></h2>
+      </div>
+
+      <p class="start-tagline">
+        Tell us what you are trying to make. We read every message and reply <br> within two working days, usually
+        <span>same day</span>.
+      </p>
+
+      <form class="start-form-grid" action="#" method="POST"
+        onsubmit="event.preventDefault(); alert('Form submitted!');">
+        <!-- Left Column -->
+        <div style="display: flex; flex-direction: column; gap: 40px;">
+          <div class="form-group">
+            <label for="name">NAME</label>
+            <input type="text" id="name" name="name" placeholder="your name" required>
+          </div>
+          <div class="form-group">
+            <label for="what-you-need">WHAT YOU NEED</label>
+            <select id="what-you-need" name="what_you_need" required>
+              <option value="" disabled selected>pick one</option>
+              <option value="design">Design</option>
+              <option value="engineering">Engineering</option>
+              <option value="ai-media">AI Media</option>
+              <option value="all-three">All Three</option>
+            </select>
+            <span class="select-arrow">v</span>
+          </div>
+          <div class="form-group">
+            <label for="timeline">TIMELINE</label>
+            <select id="timeline" name="timeline" required>
+              <option value="" disabled selected>pick one</option>
+              <option value="immediate">Immediate</option>
+              <option value="1-2-months">1–2 months</option>
+              <option value="flexible">Flexible</option>
+            </select>
+            <span class="select-arrow">v</span>
+          </div>
+          <div class="form-group">
+            <label for="message">MESSAGE</label>
+            <textarea id="message" name="message" placeholder="what are you trying to make" required></textarea>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div style="display: flex; flex-direction: column; gap: 40px;">
+          <div class="form-group">
+            <label for="email">EMAIL</label>
+            <input type="email" id="email" name="email" placeholder="you@company.com" required>
+          </div>
+          <div class="form-group">
+            <label for="budget">BUDGET</label>
+            <select id="budget" name="budget" required>
+              <option value="" disabled selected>pick one</option>
+              <option value="under-25k">Under $25k</option>
+              <option value="25k-50k">$25k – $50k</option>
+              <option value="50k-100k">$50k – $100k</option>
+              <option value="100k-plus">$100k+</option>
+            </select>
+            <span class="select-arrow">v</span>
+          </div>
+          <div class="form-group">
+            <label for="heard-about-us">HEARD ABOUT US</label>
+            <input type="text" id="heard-about-us" name="heard_about_us" placeholder="optional">
+          </div>
+        </div>
+
+        <div class="submit-btn-container" style="grid-column: 1 / -1;">
+          <button type="submit" class="submit-btn magnetic-btn"><span>*</span> SEND IT &rarr;</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer-section">
+    <div class="container">
+      <div class="footer-wordmark">
+        hidenothin
+      </div>
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>NAVIGATE</h4>
+          <ul>
+            <li><a href="#design">SERVICES</a></li>
+            <li><a href="#what-we-make">IN DETAIL</a></li>
+            <li><a href="#how-we-work">APPROACH</a></li>
+            <li><a href="#studio">STUDIO</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>ELSEWHERE</h4>
+          <ul>
+            <li><a href="https://instagram.com" target="_blank" rel="noopener noreferrer">INSTAGRAM</a></li>
+            <li><a href="https://are.na" target="_blank" rel="noopener noreferrer">ARE.NA</a></li>
+            <li><a href="https://read.cv" target="_blank" rel="noopener noreferrer">READ.CV</a></li>
+            <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LINKEDIN</a></li>
+          </ul>
+        </div>
+        <div class="footer-col say-hello-col">
+          <h4>SAY HELLO</h4>
+          <a href="mailto:hello@hidenothin.studio" class="footer-email">hello@hidenothin.studio</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>N072 / hidenothin studio / 2025 / all work, no smoke</span>
+        <span>+ made in the open</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Responsive hamburger menu logic
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navLinks.classList.toggle('active');
+    });
+
+    // Close menu when link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+      });
+    });
+
+    // Premium Animations Logic
+    document.addEventListener('DOMContentLoaded', () => {
+      // Force scroll to top on reload
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+
+      // 1. Trigger Hero Text staggered reveal
+      const heroTitle = document.querySelector('.hero-title.reveal-text');
+      if (heroTitle) {
+        setTimeout(() => {
+          heroTitle.classList.add('active');
+        }, 300);
+      }
+
+      // Explicitly reveal the hero image on load
+      const heroImg = document.querySelector('.hero-slot img');
+      if (heroImg) {
+        setTimeout(() => {
+          heroImg.classList.add('active');
+        }, 400);
+      }
+
+      // 2. IntersectionObserver for reveal-num and reveal-clip
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0,
+        rootMargin: '0px 0px 0px 0px'
+      });
+
+      document.querySelectorAll('.reveal-num, .reveal-clip').forEach(el => {
+        // Hero image is already animated on load, but we can observe others
+        if (el !== heroImg) {
+          revealObserver.observe(el);
+        }
+      });
+
+      // 3. Hero Image Parallax (Only desktop)
+      const parallaxImg = document.querySelector('.parallax-img');
+      if (parallaxImg) {
+        let ticked = false;
+        window.addEventListener('scroll', () => {
+          if (!ticked) {
+            window.requestAnimationFrame(() => {
+              const scrolled = window.pageYOffset;
+              if (window.innerWidth > 1024) {
+                // Do not shift horizontally as left: -101px is handled by CSS
+                parallaxImg.style.transform = `translate3d(0, ${scrolled * 0.12}px, 0)`;
+              } else {
+                parallaxImg.style.transform = 'none';
+              }
+              ticked = false;
+            });
+            ticked = true;
+          }
+        }, { passive: true });
+      }
+
+      // 4. Springy Magnetic CTA Buttons
+      document.querySelectorAll('.magnetic-btn').forEach(btn => {
+        btn.addEventListener('mousemove', e => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          
+          btn.style.transition = 'transform 0.05s linear';
+          btn.style.transform = `translate3d(${x * 0.35}px, ${y * 0.35}px, 0)`;
+        });
+        
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transition = 'transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+          btn.style.transform = 'translate3d(0, 0, 0)';
+        });
+      });
+
+      // 5. Audio Autoplay and Equalizer Mute Toggle
+      const bgAudio = document.getElementById('bgAudio');
+      const soundToggle = document.getElementById('soundToggle');
+
+      if (bgAudio && soundToggle) {
+        soundToggle.addEventListener('click', () => {
+          if (bgAudio.paused) {
+            playAudio();
+          } else {
+            pauseAudio();
+          }
+        });
+
+        function playAudio() {
+          bgAudio.play()
+            .then(() => {
+              soundToggle.classList.add('playing');
+            })
+            .catch(err => {
+              console.log('Autoplay blocked, waiting for interaction:', err);
+            });
+        }
+
+        function pauseAudio() {
+          bgAudio.pause();
+          soundToggle.classList.remove('playing');
+        }
+
+        // Try playing immediately
+        playAudio();
+
+        // Autoplay bypass on first visitor interaction (scroll, click, touch, keydown)
+        const startAutoplay = () => {
+          if (bgAudio.paused) {
+            playAudio();
+          }
+          cleanupAutoplay();
+        };
+
+        const cleanupAutoplay = () => {
+          document.removeEventListener('click', startAutoplay);
+          document.removeEventListener('scroll', startAutoplay);
+          document.removeEventListener('touchstart', startAutoplay);
+          document.removeEventListener('keydown', startAutoplay);
+        };
+
+        document.addEventListener('click', startAutoplay);
+        document.addEventListener('scroll', startAutoplay, { passive: true });
+        document.addEventListener('touchstart', startAutoplay, { passive: true });
+        document.addEventListener('keydown', startAutoplay);
+      }
+    });
+  </script>
+</body>
+
+</html>
