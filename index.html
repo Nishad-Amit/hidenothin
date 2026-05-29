@@ -2418,10 +2418,55 @@
         transform: scaleY(1);
       }
     }
+
+    #page-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background-color: #141414;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #page-loader.dismissing {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #page-loader.gone {
+      display: none;
+    }
+    .loader-word-wrap {
+      overflow: hidden;
+      line-height: 1;
+    }
+    .loader-word {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: clamp(36px, 8vw, 96px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: #F2EFE8;
+      display: block;
+      transform: translateY(110%);
+      transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #page-loader.active .loader-word {
+      transform: translateY(0);
+    }
+    body.loading {
+      overflow: hidden;
+    }
   </style>
 </head>
 
-<body>
+<body class="loading">
+
+  <div id="page-loader">
+    <div class="loader-word-wrap">
+      <span class="loader-word">hidenothin</span>
+    </div>
+  </div>
 
   
   <header>
@@ -3001,27 +3046,45 @@
 
     // Premium Animations Logic
     document.addEventListener('DOMContentLoaded', () => {
-      // Force scroll to top on reload
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
       }
       window.scrollTo(0, 0);
 
-      // 1. Trigger Hero Text staggered reveal
-      const heroTitle = document.querySelector('.hero-title.reveal-text');
-      if (heroTitle) {
-        setTimeout(() => {
-          heroTitle.classList.add('active');
-        }, 300);
+      const loader = document.getElementById('page-loader');
+      const loaderWord = loader.querySelector('.loader-word');
+
+      function dismissLoader() {
+        loader.classList.add('dismissing');
+        document.body.classList.remove('loading');
+        loader.addEventListener('transitionend', () => {
+          loader.classList.add('gone');
+        }, { once: true });
+
+        const heroTitle = document.querySelector('.hero-title.reveal-text');
+        if (heroTitle) {
+          setTimeout(() => heroTitle.classList.add('active'), 200);
+        }
+        const heroImg = document.querySelector('.hero-slot img');
+        if (heroImg) {
+          setTimeout(() => heroImg.classList.add('active'), 300);
+        }
       }
 
-      // Explicitly reveal the hero image on load
-      const heroImg = document.querySelector('.hero-slot img');
-      if (heroImg) {
-        setTimeout(() => {
-          heroImg.classList.add('active');
-        }, 400);
-      }
+      setTimeout(() => loader.classList.add('active'), 80);
+
+      const minDisplay = new Promise(resolve => setTimeout(resolve, 1400));
+      const windowLoad = new Promise(resolve => {
+        if (document.readyState === 'complete') {
+          resolve();
+        } else {
+          window.addEventListener('load', resolve, { once: true });
+        }
+      });
+
+      Promise.all([minDisplay, windowLoad]).then(() => {
+        setTimeout(dismissLoader, 200);
+      });
 
       // 2. IntersectionObserver for reveal-num and reveal-clip
       const revealObserver = new IntersectionObserver((entries) => {
