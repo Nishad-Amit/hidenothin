@@ -3036,12 +3036,14 @@
           document.removeEventListener('scroll', startAutoplay);
           document.removeEventListener('touchstart', startAutoplay);
           document.removeEventListener('keydown', startAutoplay);
+          document.removeEventListener('mousemove', startAutoplay);
         };
 
         document.addEventListener('click', startAutoplay);
         document.addEventListener('scroll', startAutoplay, { passive: true });
         document.addEventListener('touchstart', startAutoplay, { passive: true });
         document.addEventListener('keydown', startAutoplay);
+        document.addEventListener('mousemove', startAutoplay, { passive: true });
       }
     });
   </script>
