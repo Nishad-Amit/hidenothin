@@ -242,7 +242,7 @@
     .logo {
       display: inline-flex;
       align-items: center;
-      width: 104px;
+      gap: 8px;
       height: 36px;
       font-family: "Instrument Serif", serif;
       font-weight: 400;
@@ -252,6 +252,15 @@
       letter-spacing: -0.01em;
       /* -1% */
       color: #141414;
+      text-decoration: none;
+    }
+
+    .logo-img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      flex-shrink: 0;
+      display: block;
     }
 
     .nav-links {
@@ -2475,7 +2484,10 @@
   <header>
     <div class="container">
       <nav>
-        <a href="#" class="logo instrument-serif-regular">hidenothin</a>
+        <a href="#" class="logo instrument-serif-regular">
+          <img src="logo.png" alt="hidenothin logo" class="logo-img">
+          hidenothin
+        </a>
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
           <span></span>
           <span></span>
